@@ -89,10 +89,15 @@ void LoadData()
 void displayUniversities(){
     cout<<"Hello World"<<endl;
 }
+void DisplayMenu(){
+    cout<<"============================================================================================\n\tTOP UNIVERSITY RECOMMENDATION SYSTEM FOR SECONDARY SCHOOL STUDENTS\n============================================================================================\n";
+    cout<<"1. Display All Universities\n2. Sort Alphabaticaly\n3. Search University Detail\n4. Register as a customer of EE\n";
+}
 int main(){
 
 // Readng data from CSV File
-LoadData();
+DisplayMenu();
+// LoadData();
 
 
 
