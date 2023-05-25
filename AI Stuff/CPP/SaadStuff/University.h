@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-
+using namespace std;
 class University
 {
   public:
-    // string name;
+    string name;
     int academic_reputation;
     int employer_reputation;
     int faculty_student_ratio;
