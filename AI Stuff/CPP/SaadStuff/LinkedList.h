@@ -1,5 +1,8 @@
 #include <iostream>
 #include"Node.h"
+#include<string>
+
+using namespace std;
 // Implement LinkedList 
 class LinkedList
 {
@@ -16,7 +19,7 @@ class LinkedList
         size = 0;
     }
     // Insert Node at the end of the List
-    void insert(int data){
+    void insert(University* data){
         Node* newNode = new Node(data);
         if(head == NULL){
             head = newNode;
@@ -30,6 +33,16 @@ class LinkedList
             size++;
         }
 
+    }
+
+    void printUniversities (){
+        Node* current = head;
+        while (current != nullptr)
+        {
+           cout<<current->data->institute<<endl;
+           current = current->next;
+        }
+        
     }
 
 

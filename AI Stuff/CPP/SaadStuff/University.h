@@ -4,28 +4,61 @@ using namespace std;
 class University
 {
   public:
-    string name;
-    int academic_reputation;
-    int employer_reputation;
-    int faculty_student_ratio;
-    int citations_per_faculty;
-    int international_faculty_ratio;
-    int international_student_ratio;
-    int international_research_network;
-    int employment_outcome;
+    
+        string rank;                        //Rank Of the University
+        string institute;                   //Name of he University
+        string locationCode;                //Location Code
+        string location;                    //Location
+        string arScore;
+        string arRank;
+        string erScore;
+        string erRank;
+        string fsrScore;
+        string fsrRank;
+        string cpfScore;
+        string cpfRank;
+        string ifrScore;
+        string ifrRank;
+        string isrScore;
+        string isrRank;
+        string irnScore;
+        string irnRank;
+        string gerScore;
+        string gerRank;
+        string scoreScaled;
 
-    University(int academic_reputation, int employer_reputation, int faculty_student_ratio, int citations_per_faculty, int international_faculty_ratio, int international_student_ratio, int international_research_network, int employment_outcome);
+        University(){
+        
+        }
+
+         University(string rank, string institute, string locationCode, string location,
+               string arScore, string arRank, string erScore, string erRank, string fsrScore,
+               string fsrRank, string cpfScore, string cpfRank, string ifrScore, string ifrRank,
+               string isrScore, string isrRank, string irnScore, string irnRank, string gerScore,
+               string gerRank, string scoreScaled)
+    {
+        this->rank = rank;
+        this->institute = institute;
+        this->locationCode = locationCode;
+        this->location = location;
+        this->arScore = arScore;
+        this->arRank = arRank;
+        this->erScore = erScore;
+        this->erRank = erRank;
+        this->fsrScore = fsrScore;
+        this->fsrRank = fsrRank;
+        this->cpfScore = cpfScore;
+        this->cpfRank = cpfRank;
+        this->ifrScore = ifrScore;
+        this->ifrRank = ifrRank;
+        this->isrScore = isrScore;
+        this->isrRank = isrRank;
+        this->irnScore = irnScore;
+        this->irnRank = irnRank;
+        this->gerScore = gerScore;
+        this->gerRank = gerRank;
+        this->scoreScaled = scoreScaled;
+    }
+        
 
 };
-
-University::University(int academic_reputation, int employer_reputation, int faculty_student_ratio, int citations_per_faculty, int international_faculty_ratio, int international_student_ratio, int international_research_network, int employment_outcome) {
-    // this->name = name;
-    this->academic_reputation = academic_reputation;
-    this->employer_reputation = employer_reputation;
-    this->faculty_student_ratio = faculty_student_ratio;
-    this->citations_per_faculty = citations_per_faculty;
-    this->international_faculty_ratio = international_faculty_ratio;
-    this->international_student_ratio = international_student_ratio;
-    this->international_research_network = international_research_network;
-    this->employment_outcome = employment_outcome;
-  }

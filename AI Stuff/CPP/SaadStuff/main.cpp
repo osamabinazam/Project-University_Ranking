@@ -1,6 +1,6 @@
 #include<iostream>
 #include<string>
-#include"University.h"
+
 #include <fstream>
 #include <sstream>
 #include <iomanip>
@@ -11,11 +11,12 @@
 #include <cmath>
 #include <cassert>
 #include <climits>
+#include"LinkedList.h"
 
 using namespace std;
 
 
-void LoadData()
+void LoadData(LinkedList* L )
 {
     int counter =0;
     std::ifstream fin("universities_ranking.csv");
@@ -27,6 +28,7 @@ void LoadData()
             flag = false;
             continue;
         }
+        // if (counter ==5)        break;
         stringstream ss(line);
         string rank;                        //Rank Of the University
         string institute;                   //Name of he University
@@ -81,8 +83,10 @@ void LoadData()
         getline(ss,gerScore,',');
         getline(ss,gerRank,',');
         getline(ss,scoreScaled,',');
-       cout<<rank<<" "<<institute<<" "<<locationCode<<" "<<location<<" "<<arScore<<" "<<arRank<<" "<<erScore<<" "<<erRank<<" "<<fsrScore<<" "<<fsrRank<<" "<<cpfScore<<" "<<cpfRank<<" "<<ifrScore<<" ";
-       cout<<ifrRank<<" "<<isrScore<<" "<<isrRank<<" "<<irnScore<<" "<<irnRank<<" "<<gerScore<<" "<<gerRank<<" "<<scoreScaled<<endl;
+    //    cout<<rank<<" "<<institute<<" "<<locationCode<<" "<<location<<" "<<arScore<<" "<<arRank<<" "<<erScore<<" "<<erRank<<" "<<fsrScore<<" "<<fsrRank<<" "<<cpfScore<<" "<<cpfRank<<" "<<ifrScore<<" ";
+    //    cout<<ifrRank<<" "<<isrScore<<" "<<isrRank<<" "<<irnScore<<" "<<irnRank<<" "<<gerScore<<" "<<gerRank<<" "<<scoreScaled<<endl;
+       L->insert(new University(rank, institute, locationCode, location,arScore,arRank, erScore,erRank,fsrScore,fsrRank,cpfScore,cpfRank,ifrScore,ifrRank, isrScore,isrRank,irnScore,ifrRank, gerScore, gerRank, scoreScaled));
+    //    counter++;
     }
     
 }
@@ -94,9 +98,20 @@ void DisplayMenu(){
     cout<<"1. Display All Universities\n2. Sort Alphabaticaly\n3. Search University Detail\n4. Register as a customer of EE\n";
 }
 int main(){
+LinkedList* L = new LinkedList();
+LoadData(L);
+DisplayMenu();
+int choice=-1;
+cout<<"Enter Your Choice: ";
+cin>>choice;
+if (choice ==1 ){
+    cout<<"The Size of List is : "<<L->size<<"\nUniversities are : \n";
+    // L->printUniversities();
+}
+
 
 // Readng data from CSV File
-DisplayMenu();
+
 // LoadData();
 
 

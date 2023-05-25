@@ -1,12 +1,13 @@
+#include "University.h"
 
 class Node {
     public:
-        int data;
+        University* data;
         Node* next;
         Node* prev;
 
     // constructor
-    Node (int d){
+    Node (University* d){
         this->data=d;
         this->next=nullptr;
         this->prev = nullptr;
