@@ -1,6 +1,7 @@
 #include <iostream>
 #include"Node.h"
 #include<string>
+// #include"University.h"
 
 using namespace std;
 // Implement LinkedList 
@@ -39,21 +40,57 @@ class LinkedList
         }
 
     }
-
-
-    bool SearchNode (string username){
-        
-    }
-
-    void printUniversities (){
-        Node<T>* current = head;
+    void Display (LinkedList<T>* list){
+        Node<T>* current = list->head;
         while (current != nullptr)
         {
-           cout<<current->data->institute<<endl;
+           current->data->toString();
            current = current->next;
         }
         
     }
+    Node<T>* LinearSearchNode (string key){
+        if (isEmpty()){
+            cout<<"University List is empty!"<<endl;
+            return NULL;
+        }
+        Node<T>* current = head;
+        while (current != nullptr)
+        {
+            if (current->data->institute == key){
+                return current;
+            }
+            current = current->next;  
+        } 
+    };
 
+    Node<T>* SearchUser(string username){
+        if (isEmpty()){
+            cout<<"University List is empty!"<<endl;
+            return NULL;
+        }
+        Node<T>* current = head;
+        while (current != nullptr)
+        {
+            if (current->data->username == username){
+                return current;
+            }
+            current = current->next;  
+        } 
+    };
 
+    
+
+    void listToArray(LinkedList<University>* list, University array[]){
+        // University[] array = new University[list->size];
+                Node<University>* current = list->head;
+                int i = 0;
+                while (current!= nullptr)
+                {
+                    array[i] = *current->data;
+                    current = current->next;
+                    i++;
+                }
+                // return array;
+    }
 };

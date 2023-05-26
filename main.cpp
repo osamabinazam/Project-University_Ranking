@@ -93,7 +93,7 @@ void displayUniversities(){
 int StartPanel(){
     int choice=-1;
     cout<<"------------------------------------------------------------------------------------------\n";
-    cout<<"\t\t\t Welcome to the Universities Ranking System";
+    cout<<"\t\t\t Welcome to the Universities Ranking System\n";
     cout<<"------------------------------------------------------------------------------------------\n";
     cout<<"1. MoEH Administrator\n2. Customer\n3. Normal User\n4 Exit\n";
     cin>>choice;
@@ -136,8 +136,9 @@ User* CreateUserInterface(){
         cout<<"Is Given Information is correct ? (Y/N) (y/n)";
         cin>>validater;
         if(validater == 'Y' || validater == 'y'){
-            User *newUser = new User (name, age, gender, email,username, password, phone,country);
-            return newUser;
+            User* newNode = new User (name, age, gender, email,username, password, phone,country);
+            // u->insert (newNode);
+            return newNode;
             
         }
         else{
@@ -158,22 +159,32 @@ void NormalUserPanel(LinkedList<University> *l, LinkedList<User> *u){
     cout<<"1. Display All Universities\n2. Sort Alphabaticaly\n3. Search University Detail\n4. Register as a customer of EE\n5. Exit\n";
     cout<<"Select an Option: ";
     cin>>choice;   
-    
+    User* us=nullptr;
+    string name;
+    Node<University>* uni=nullptr;
     switch (choice)
     {
     case 1:
-        l->printUniversities();
+        system("cls");
+        l->Display(l);
         break;
     case 2:
+        system("cls");
         cout<<"Will be Implemented\n";
         break;
     case 3:
-        cout<<"Will be Implemented\n";
+        system("cls");
+        cin.ignore();
+        cout<<"Please enter university's name : ";
+        getline (cin,name);
+        uni=l->LinearSearchNode(name);
+        uni->data->toString();
         break;
     case 4:
-        User* newUser = CreateUserInterface();
-        if (newUser != nullptr){
-            u->insert(newUser);
+        system("cls");
+        us = CreateUserInterface();
+        if (us != nullptr ){
+            u->insert(us);
             cout<<"Registered Successfully\n";
         }
         else {
@@ -187,15 +198,122 @@ void NormalUserPanel(LinkedList<University> *l, LinkedList<User> *u){
     }
     cout<<"Do you want to perform another operation ? (Y/N)";
     cin>>ch;
-
+    system("cls");
     }while(ch == 'Y' || ch == 'y');
 
 }
 
 
+// Customer Dashboard
+void CustomerDashboard(LinkedList<University>* universities , LinkedList<User>* users){
+    char ch;
+    do{
+    cout<<"============================================================================================\n\tTOP UNIVERSITY RECOMMENDATION SYSTEM FOR SECONDARY SCHOOL STUDENTS\n============================================================================================\n";
+    int choice=-1;
+    cout<<"1. View Universities Information\n2. Feedback\n3. Logout\n";
+    cout<<"Select an Option: ";
+    cin>>choice;   
+    User* us=nullptr;
+    string name;
+    Node<University>* uni=nullptr;
+    switch (choice)
+    {
+    case 1:
+        system("cls");
+        cout<<"1. Sort Infotmation By Name \n2. Search University \n3. Back\n";
+        cout<<"Select an Option: ";
+        cin>>choice;
+        switch (choice){
+            case 1:
+                universities->Display(universities);
+                break;
+            case 2:
+                system("cls");
+                cin.ignore();
+                cout<<"Please enter university's name : ";
+                getline (cin,name);
+                uni=universities->LinearSearchNode(name);
+                if (uni==nullptr) {
+                    cout<<"University Not Found\n";
+                    continue;
+                }
+                uni->data->toString();
+                break;
+            case 3:
+                break;
+
+        }
+        break;
+    case 2:
+        system("cls");
+        cout<<"Feedback System  Implement later\n";
+        break;
+    case 3:
+        system("cls");
+        cout<<"Logging out "<<endl;
+        return;
+        break;
+    default:
+        return;
+        break;
+    }
+    cout<<"Do you want to perform another operation ? (Y/N)";
+    cin>>ch;
+    system("cls");
+
+    }while(ch == 'Y' || ch == 'y');
+}
+
+// Admin Dashboard
+void AdminDashboard(LinkedList<User>* U){
+    char ch;
+    do{
+    system("cls");
+    cout<<"============================================================================================\n\tTOP UNIVERSITY RECOMMENDATION SYSTEM FOR SECONDARY SCHOOL STUDENTS\n============================================================================================\n";
+    int choice=-1;
+    cout<<"1. Display All Users\n2. Modify User\n3. Delete User\n4. Reply to Feedback\n5. Top 10 University recommended by parents\n6. Exit\n";
+    cout<<"Select an Option: ";
+    cin>>choice;   
+    User* us=nullptr;
+    Node<University>* uni=nullptr;
+    switch (choice)
+    {
+    case 1:
+        system("cls");
+        U->Display(U);
+        break;
+    case 2:
+        system("cls");
+        cout<<"Modify User Implement later\n";
+        break;
+    case 3:
+        system("cls");
+        // uni=UL->LinearSearchNode("Stanford University");
+        cout<<"Delete User Implement later\n";
+        break;
+    case 4:
+        cout<<"Implement it Later"<<endl;
+        break;
+    case 6:
+        cout<<"Exiting..."<<endl;
+        return;
+    default:
+        break;
+    }
+    cout<<"Do you want to perform another operation ? (Y/N)";
+    cin>>ch;
+    system("cls");
+
+    }while(ch == 'Y' || ch == 'y');
+}
+
+
+
+
 User* LoginPanel(LinkedList<User>* U ){
+    cin.ignore();
     cout<<"------------------------------------------------------------------------------------------\n";
-    cout<<"\t\t\t Login to System";
+    cout<<"\t\t\t Login to System\n";
     cout<<"------------------------------------------------------------------------------------------\n";
     string username="";
     string password="";
@@ -203,8 +321,10 @@ User* LoginPanel(LinkedList<User>* U ){
     getline(cin,username);
     cout<<"Enter Password: ";
     getline(cin,password);
-    if(username == "admin" && password == "admin"){
-        cout<<"Logged in as admin"<<endl;
+    Node<User>* user = U->SearchUser(username);
+
+    if(username == "admin" && user->data->password==password){
+        AdminDashboard(U);
         return nullptr;
     }
     else if (username == "osama" && password =="toor"){
@@ -218,29 +338,48 @@ User* LoginPanel(LinkedList<User>* U ){
 
 }
 
-void RegisteredUserPanel(){
 
-}
-
+// Main Driven method
 
 int main(){
 LinkedList<University>* L = new LinkedList<University>();
 LinkedList<User>* U = new LinkedList<User>();
+U->insert(new User("John",18,"male", "osama@gmail.com", "admin", "admin","093223","Pakisan"));
 LoadData(L);
-int choice = StartPanel();
+University uni[L->size];
+L->listToArray(L, uni);
 
-switch (choice)
-{
-case 1:
-    cout<<"Will Be implemented\n";    
-    break;
-case 3:
-    NormalUserPanel(L, U);
-    break;
 
-default:
-    break;
-}
+do{
+
+    int choice = StartPanel();
+    char ch ;
+    switch (choice)
+    {
+    case 1:
+        system("cls");
+        LoginPanel(U);    
+        break;
+    case 2:
+        system("cls");
+        CustomerDashboard(L, U);
+        cout<<"Will Be implemented\n";    
+        break;
+    case 3:
+        system("cls");
+        NormalUserPanel(L, U);
+        break;
+    case 4:
+        cout<<"Thank you for using our platform"<<endl;
+        cout<<"Exiting..."<<endl;
+        return 0;
+    default:
+        break;
+    }
+
+}while (true);
+
+
 
 
 

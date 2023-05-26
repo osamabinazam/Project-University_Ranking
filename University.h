@@ -59,6 +59,23 @@ class University
         this->gerRank = gerRank;
         this->scoreScaled = scoreScaled;
     }
+
+    void toString (){
+        cout<<"------------------------------------------------------------------------\n";
+        cout << "Rank: " << rank << endl;
+        cout << "Institute: " << institute << endl;
+        cout << "Location Code: " << locationCode << endl;
+        cout << "Location: " << location << endl;
+        cout << "Academic Reputation Score: " << arScore << endl;
+        cout << "Academic Reputation Rank: " << arRank << endl;
+        cout << "Employer Reputation Score: " << erScore << endl;
+        cout << "Employer Reputation Rank: " << erRank << endl;
+        cout << "FSR Score: " << fsrScore << endl;
+        cout << "FSR Rank: " << fsrRank << endl;
+        cout << "CPF Score: " << cpfScore << endl;
+        cout << "CPF Rank: " << cpfRank << endl;
+        cout<<"------------------------------------------------------------------------\n";
+    }
         
 
 };

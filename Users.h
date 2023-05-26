@@ -36,6 +36,16 @@ class User{
             this->country = country;
         }
 
+        void toString(){
+
+
+            cout<<"------------------------------------------------------------------------\n";
+            cout<<"Name: "<<this->name<<"\nAge : "<<this->age<<endl;
+            cout<<"Email: "<<this->email<<"\nPhone: "<<this->phone<<"\nGender: "<<this->gender;
+
+            cout<<"------------------------------------------------------------------------\n";
+        }
+
 
 
 };
