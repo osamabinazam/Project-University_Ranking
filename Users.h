@@ -13,6 +13,7 @@ class User{
         string phone;
         string country;
         bool isAdmin;
+        LinkedList<University> favUnies;
 
         User(){
             name = "";
@@ -34,14 +35,16 @@ class User{
             this->password = password;
             this->phone = phone;
             this->country = country;
+
         }
 
         void toString(){
 
 
             cout<<"------------------------------------------------------------------------\n";
-            cout<<"Name: "<<this->name<<"\nAge : "<<this->age<<endl;
+            cout<<"Name: "<<this->name<<"\nAge : "<<this->age<<"\nUsername:"<<this->username<<"\n";
             cout<<"Email: "<<this->email<<"\nPhone: "<<this->phone<<"\nGender: "<<this->gender;
+            
 
             cout<<"------------------------------------------------------------------------\n";
         }

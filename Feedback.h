@@ -5,9 +5,135 @@ class Feedback{
     public:
         User user;
         string feedback;
+        string title;
+        string reply;
+        University uni;
 
-        Feedback(User user, string feedback){
+        Feedback(){
+            this->feedback="";
+            this->reply="";
+
+        }
+        Feedback(User user, string feedback, University uni, string title) {
             this->user = user;
             this->feedback = feedback;
+            this->uni=uni;
+            reply="";
+            this->title=title;
         }
+};
+
+class FeedbackNode {
+    public:
+        Feedback data;
+        FeedbackNode *next;
+        FeedbackNode *prev;
+
+        FeedbackNode(){
+            next = NULL;
+            prev = NULL;
+            // this->data=NULL
+        }
+
+        FeedbackNode(Feedback* data){
+            this->data = *data;
+            this->next = NULL;
+            this->prev= NULL;
+            this->data.reply="This is Reply";
+        }
+
+        void displayFeedback(){
+            cout<<"============================================================================================\n";
+            cout<<"Feedback User: "<<this->data.user.name<<endl;
+            cout<<"Feedback Title: "<<this->data.title<<endl;
+            cout<<"Feedback: "<<this->data.feedback<<endl;
+            cout<<"============================================================================================\n";
+
+        }
+        void displayReply(){
+            cout<<"============================================================================================\n";
+            cout<<"University Name : "<<this->data.uni.institute<<endl;
+            cout<<"Title of the Feedback : "<<this->data.title<<endl;
+            cout<<"Reply : "<<this->data.reply<<endl;
+            cout<<"============================================================================================\n";
+        }
+};
+
+// Feedback Class Implements LinekedList
+class FeedbackList{
+    public:
+        FeedbackNode *head;
+        FeedbackNode *tail;
+        int size;
+        FeedbackList(){
+            head = NULL;
+            tail = NULL;
+            size = 0;
+        }
+        bool isEmpty(){
+            return (head == NULL && tail == NULL);
+
+        }
+        void insert(Feedback* data){
+            FeedbackNode* newNode = new FeedbackNode(data);
+            if (isEmpty()){
+                head = newNode;
+                tail = newNode;
+                size++;
+            }
+            else {
+                tail->next = newNode;
+                newNode->prev = tail;
+                tail = newNode;
+                size++;
+            }
+        }
+
+        void displayFeedbacks(){
+            if (isEmpty()) {
+                cout<<"There is no Feedback to display\n";
+            }
+            else {
+                FeedbackNode* current = this->head;
+                char ch;
+                string message="";
+                while (current != nullptr)
+                {
+                    current->displayFeedback();
+                    cout<<"\n Do you want to reply ? (Y/N),(y/n) : ";
+                    cin>>ch;
+                    if (ch == 'Y' || ch == 'y'){
+                        cout<<"\n Enter reply : ";
+                        cin>>message;
+                        current->data.reply = message;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                
+            }
+        }
+
+        void displayFeedbackReply(User *user){
+            
+            bool flag;
+            if (this->isEmpty()){
+                flag=true;
+            }
+            flag=true;
+            FeedbackNode *current = head;
+            while (current != NULL)
+            {
+                if (user->username == current->data.user.username){
+                    current->displayReply();
+                    flag= false;
+                }
+                current = current->next;
+            }
+            if (flag){
+                cout<<"There is no feedback reply...."<<endl;
+            }
+        }
+    
 };
