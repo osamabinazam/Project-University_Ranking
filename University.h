@@ -1,10 +1,19 @@
+#ifndef UNIVERSITY_H
+#define UNIVERSITY_H
+
 #include <iostream>
 #include <string>
 using namespace std;
+
+
+/*
+    This class is the defination of University data type. It stores information related to the University 
+*/
 class University
 {
   public:
-    
+
+        // Data members
         string rank;                        //Rank Of the University
         string institute;                   //Name of he University
         string locationCode;                //Location Code
@@ -26,9 +35,12 @@ class University
         string gerScore;
         string gerRank;
         string scoreScaled;
+        int recommend=1;
 
+
+        // Constructors
         University(){
-        
+            this->institute="";
         }
 
          University(string rank, string institute, string locationCode, string location,
@@ -62,20 +74,24 @@ class University
 
     void toString (){
         cout<<"------------------------------------------------------------------------\n";
-        cout << "Rank: " << rank << endl;
-        cout << "Institute: " << institute << endl;
-        cout << "Location Code: " << locationCode << endl;
-        cout << "Location: " << location << endl;
-        cout << "Academic Reputation Score: " << arScore << endl;
-        cout << "Academic Reputation Rank: " << arRank << endl;
-        cout << "Employer Reputation Score: " << erScore << endl;
-        cout << "Employer Reputation Rank: " << erRank << endl;
-        cout << "FSR Score: " << fsrScore << endl;
-        cout << "FSR Rank: " << fsrRank << endl;
-        cout << "CPF Score: " << cpfScore << endl;
-        cout << "CPF Rank: " << cpfRank << endl;
+        cout << "Rank                       : " << rank << endl;
+        cout << "Institute                  : " << institute << endl;
+        cout << "Location Code              : " << locationCode << endl;
+        cout << "Location                   : " << location << endl;
+        cout << "Academic Reputation Score  : " << arScore << endl;
+        cout << "Academic Reputation Rank   : " << arRank << endl;
+        cout << "Employer Reputation Score  : " << erScore << endl;
+        cout << "Employer Reputation Rank   : " << erRank << endl;
+        cout << "FSR Score                  : " << fsrScore << endl;
+        cout << "FSR                        : " << fsrRank << endl;
+        cout << "CPF Score                  : " << cpfScore << endl;
+        cout << "CPF Rank                   : " << cpfRank << endl;
+        cout << "Score Scalled              : " << scoreScaled << endl;
         cout<<"------------------------------------------------------------------------\n";
     }
         
 
 };
+
+#endif
+

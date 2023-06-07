@@ -1,8 +1,13 @@
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+
+
 #include <iostream>
 #include"Node.h"
 #include<string>
 #include<cstring>
-// #include"University.h"
+#include <stdexcept>
+
 
 using namespace std;
 // Implement LinkedList 
@@ -45,54 +50,33 @@ class LinkedList
     // Display List
     void Display (LinkedList<T>* list){
         Node<T>* current = list->head;
+        char c;
+        int count=1;
         while (current != nullptr)
         {
+        bool flag=false;
            current->data->toString();
+           if (count==50){
+            count=1;
+            cout<<"\n1. More Universities\n\nPress any key to \"Go BACK\"\nSelect an option: ";
+            cin>>c;
+            if (c=='1'){
+                    continue;
+                }
+            else{
+                    break;
+                }
+           }
+           
+           count++;
            current = current->next;
         }
         
     }
-    Node<T>* LinearSearchNode (string key){
-        if (isEmpty()){
-            cout<<"University List is empty!"<<endl;
-            return NULL;
-        }
-        Node<T>* current = head;
-        while (current != nullptr)
-        {
-            if (current->data->institute == key){
-                return current;
-            }
-            current = current->next;  
-        } 
-    };
 
-    Node<T>* SearchUser(string username){
-        
-        bool found = false;
-        if (isEmpty()){
-            cout<<"User list is empty"<<endl;
-            return NULL;
-        }
-        Node<T>* current = head;
-        
-        int count = 1;
-        while (current != nullptr && count<=this->size)
-        {
-            
-            
-            if (current->data->username == username){
-                
-                found = true;
-                return current;
-            }
-            current = current->next; 
-            count++; 
-        }
-       
-        return nullptr; 
-    };
 
+    // Delete a node from the list
+    // Used when user is being deleted
     bool deleteNode (Node<T>* deleteNode){
            
         
@@ -123,60 +107,20 @@ class LinkedList
         }
        
     }
-    //Binary serach
-    University binarySearch(University array[], int size, string key)
-    {
-        int low = 0;
-        int high = size - 1;
-
-        while (low <= high)
-        {
-            int mid = (low + high) / 2;
-
-            // Use the string comparison function (strcmp) to compare sentences
-            int compareResult = strcmp(array[mid].institute.c_str(), key.c_str());
-
-            if (compareResult == 0)
-            {
-                // Key found at index mid
-                cout << array[mid].institute << endl;
-                cout << array[mid].arRank << endl;
-                cout << array[mid].arScore << endl;
-                cout << array[mid].location << endl;
-                cout << array[mid].gerRank << endl;
-                return array[mid];
-            }
-            else if (compareResult < 0)
-            {
-                // array[mid].institute < key
-                low = mid + 1;
-            }
-            else
-            {
-                // array[mid].institute > key
-                high = mid - 1;
-            }
-        }
-
-        // Key not found
-        return nullptr;
-    }
+   
 
     //Sorting function to sort universites in decreasing order by their arscore, erscore, and fsrscore
     void sortDescending(University arr[], std::string factor, int length) {
     if (factor == "ar_score") {
         for (int i = 1; i < length; i++) {
             University key = arr[i];
+           
             int j = i - 1;
             while (j >= 0 && stof(arr[j].arScore) < stof(key.arScore)) {
                 arr[j + 1] = arr[j];
                 j--;
             }
             arr[j + 1] = key;
-        }
-        
-        for (int i = 0; i < length; i++) {
-            std::cout << i << "- " << arr[i].arScore << std::endl;
         }
     }
     else if (factor == "er_score") {
@@ -190,9 +134,6 @@ class LinkedList
             arr[j + 1] = key;
         }
         
-        for (int i = 0; i < length; i++) {
-            std::cout << i << "- " << arr[i].erScore << std::endl;
-        }
     }
     else if (factor == "fsr_score") {
         for (int i = 1; i < length; i++) {
@@ -205,16 +146,30 @@ class LinkedList
             arr[j + 1] = key;
         }
         
-        for (int i = 0; i < length; i++) {
-            std::cout << i << "- " << arr[i].fsrScore << std::endl;
-        }
     }
 }
 
+    void recommendedUniversityies (LinkedList<T> * list, T topUnies[]){
+        University Unies[list->size];
+        listToArray(list, Unies);
+        for (int i = 1; i < list->size; i++) {
+            University key = Unies[i];
+            int j = i - 1;
+            while (j >= 0 && Unies[j].recommend < key.recommend  ) {
+                Unies[j + 1] = Unies[j];
+                j--;
+            }
+            Unies[j + 1] = key;
+        }
+        for (int i=0; i<10; i++){
+            topUnies[i] = Unies[i];
+        }
+        
 
-    void listToArray(LinkedList<University>* list, University array[]){
+    };
+    void listToArray(LinkedList<T>* list, T array[]){
         // University[] array = new University[list->size];
-                Node<University>* current = list->head;
+                Node<T>* current = list->head;
                 int i = 0;
                 while (current!= nullptr)
                 {
@@ -228,3 +183,5 @@ class LinkedList
 
 
 
+
+#endif

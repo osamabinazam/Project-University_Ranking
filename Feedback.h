@@ -1,3 +1,7 @@
+#ifndef FEEDBACK_H
+#define FEEDBACK_H
+
+
 #include<iostream>
 #include<string>
 #include"Users.h"
@@ -8,18 +12,21 @@ class Feedback{
         string title;
         string reply;
         University uni;
+        string feedback_date;
 
         Feedback(){
             this->feedback="";
             this->reply="";
+            this->feedback_date="";
 
         }
-        Feedback(User user, string feedback, University uni, string title) {
+        Feedback(User user, string feedback, University uni, string title, string feedback_date) {
             this->user = user;
             this->feedback = feedback;
             this->uni=uni;
             reply="";
             this->title=title;
+            this->feedback_date = feedback_date;
         }
 };
 
@@ -39,11 +46,12 @@ class FeedbackNode {
             this->data = *data;
             this->next = NULL;
             this->prev= NULL;
-            this->data.reply="This is Reply";
+            this->data.reply="";
         }
 
         void displayFeedback(){
             cout<<"============================================================================================\n";
+            cout<<"Feedback Date: "<<this->data.feedback_date<<endl;
             cout<<"Feedback User: "<<this->data.user.name<<endl;
             cout<<"Feedback Title: "<<this->data.title<<endl;
             cout<<"Feedback: "<<this->data.feedback<<endl;
@@ -135,5 +143,14 @@ class FeedbackList{
                 cout<<"There is no feedback reply...."<<endl;
             }
         }
+
+        void displayFeedback (FeedbackNode *feedback){
+            cout<<"============================================================================================\n";
+            cout<<"\t\t\t\tFeedbacks\n";  
+            cout<<"============================================================================================\n\n";
+            feedback->displayFeedback();
+        }
     
 };
+
+#endif
